@@ -57,10 +57,15 @@ class ViewController: UIViewController {
         navigationController?.pushViewController(inputVC, animated: false)
     }
     
-    // Delete: Target Action
+ 
     @objc func deleteButtonTapped(sender: UIButton) {
-        numberList.remove(at: sender.tag)
-        tableView.deleteRows(at: [IndexPath(row: sender.tag, section: 0)], with: .fade)
+        // UITableViewCell hierarchy : subviews >>> contentView >>> UITableViewCell
+        guard let cell = sender.superview?.superview as? NumberCell else { fatalError("Cannot find cell for button") }
+        
+        if let indexPath = tableView.indexPath(for: cell){
+            numberList.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
     }
 }
 // MARK: - InputViewController Delegate
@@ -100,12 +105,10 @@ extension ViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: NumberCell.identifier, for: indexPath) as? NumberCell else { fatalError("Fail to create cell") }
         
         cell.configureCell(with: numberList[indexPath.row])
-       
-        cell.deleteButton.tag = indexPath.row
+        cell.delegate = self
         
         // Delete: Target Action
-        //cell.deleteButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
-        
+        cell.deleteButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
         
         // Delete: Closure
         cell.deleteHandler = { 
