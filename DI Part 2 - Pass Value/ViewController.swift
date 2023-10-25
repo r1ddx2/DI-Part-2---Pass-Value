@@ -46,14 +46,14 @@ class ViewController: UIViewController {
     // MARK: - Methods
     @objc func plusButtonPressed() {
         let inputVC = InputViewController()
-        inputVC.action = .add
-        
         inputVC.delegate = self
+        inputVC.action = .add
         
         inputVC.newNumberHandler = { newNumber in
             self.numberList.append(newNumber)
             self.tableView.reloadData()
         }
+        
         navigationController?.pushViewController(inputVC, animated: false)
     }
     
@@ -70,6 +70,7 @@ class ViewController: UIViewController {
 }
 // MARK: - InputViewController Delegate
 extension ViewController: InputViewControllerDelegate {
+    
     func didChangeNumber(inputNumber: String, cellRow: Int) {
         numberList[cellRow] = inputNumber
         tableView.reloadData()
@@ -79,16 +80,16 @@ extension ViewController: InputViewControllerDelegate {
         numberList.append(inputNumber)
         tableView.reloadData()
     }
-   
- 
+    
 }
+// MARK: - NumberCell Delegate
 extension ViewController: NumberCellDelegate {
+    
     func didPressDelete(_ cell: UITableViewCell) {
         if let indexPath = tableView.indexPath(for: cell) {
             numberList.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
-      
     }
     
     
@@ -101,9 +102,9 @@ extension ViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: NumberCell.identifier, for: indexPath) as? NumberCell else { fatalError("Fail to create cell") }
-        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: NumberCell.identifier, for: indexPath) as? NumberCell else {
+            fatalError("Fail to create cell")
+        }
         cell.configureCell(with: numberList[indexPath.row])
         cell.delegate = self
         
@@ -111,18 +112,15 @@ extension ViewController: UITableViewDataSource {
         cell.deleteButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
         
         // Delete: Closure
-        cell.deleteHandler = { 
-            self.numberList.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+        cell.deleteHandler = {
+            if let indexPath = tableView.indexPath(for: cell) {
+                self.numberList.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }
         }
-
-        // Delete: Delegate
-        cell.delegate = self
-
-
         return cell
-        
     }
+    
     
 }
 
@@ -135,19 +133,19 @@ extension ViewController: UITableViewDelegate {
         guard let cell = tableView.cellForRow(at: indexPath) as? NumberCell else { return }
         
         let inputVC = InputViewController()
-        inputVC.numberTextField.text = cell.number
-        inputVC.action = .change
-        inputVC.selectedCellRow = indexPath.row
         inputVC.delegate = self
+        inputVC.action = .change
+        inputVC.numberTextField.text = cell.number
+        inputVC.cellRowNumber = indexPath.row
         
         inputVC.newNumberHandler = { newNumber in
             self.numberList[indexPath.row] = newNumber
             self.tableView.reloadData()
         }
+        
         navigationController?.pushViewController(inputVC, animated: false)
         
     }
-    
     
 }
 
