@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9D3E41052AE91C8B00CFB447 /* NumberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3E41042AE91C8B00CFB447 /* NumberCell.swift */; };
+		9D3E41072AE9204D00CFB447 /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3E41062AE9204D00CFB447 /* InputViewController.swift */; };
 		9D8BE4262AE917FB0077132C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8BE4252AE917FB0077132C /* AppDelegate.swift */; };
 		9D8BE4282AE917FB0077132C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8BE4272AE917FB0077132C /* SceneDelegate.swift */; };
 		9D8BE42A2AE917FB0077132C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8BE4292AE917FB0077132C /* ViewController.swift */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9D3E41042AE91C8B00CFB447 /* NumberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberCell.swift; sourceTree = "<group>"; };
+		9D3E41062AE9204D00CFB447 /* InputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
 		9D8BE4222AE917FB0077132C /* DI Part 2 - Pass Value.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DI Part 2 - Pass Value.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D8BE4252AE917FB0077132C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9D8BE4272AE917FB0077132C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,6 +41,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9D3E41022AE919EF00CFB447 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				9D3E41062AE9204D00CFB447 /* InputViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		9D3E41032AE919F800CFB447 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9D3E41042AE91C8B00CFB447 /* NumberCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		9D8BE4192AE917FB0077132C = {
 			isa = PBXGroup;
 			children = (
@@ -56,6 +76,8 @@
 		9D8BE4242AE917FB0077132C /* DI Part 2 - Pass Value */ = {
 			isa = PBXGroup;
 			children = (
+				9D3E41032AE919F800CFB447 /* View */,
+				9D3E41022AE919EF00CFB447 /* Controller */,
 				9D8BE4252AE917FB0077132C /* AppDelegate.swift */,
 				9D8BE4272AE917FB0077132C /* SceneDelegate.swift */,
 				9D8BE4292AE917FB0077132C /* ViewController.swift */,
@@ -138,6 +160,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D3E41052AE91C8B00CFB447 /* NumberCell.swift in Sources */,
+				9D3E41072AE9204D00CFB447 /* InputViewController.swift in Sources */,
 				9D8BE42A2AE917FB0077132C /* ViewController.swift in Sources */,
 				9D8BE4262AE917FB0077132C /* AppDelegate.swift in Sources */,
 				9D8BE4282AE917FB0077132C /* SceneDelegate.swift in Sources */,
