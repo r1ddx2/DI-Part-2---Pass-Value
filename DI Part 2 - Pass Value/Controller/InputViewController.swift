@@ -7,23 +7,23 @@
 
 import UIKit
 
+enum UserAction {
+    case change
+    case add
+}
+
 protocol InputViewControllerDelegate: AnyObject {
     func didChangeNumber(inputNumber: String, cellRow: Int)
     func didAddNumber(inputNumber: String)
 
 }
 
-enum Action {
-    case change
-    case add
-}
-
 class InputViewController: UIViewController {
     
     var delegate: InputViewControllerDelegate?
     var newNumberHandler: ((String) -> Void)?
-    var action: Action = .add
-    var selectedCellRow: Int?
+    var action: UserAction = .add
+    var cellRowNumber: Int = 0
     
     // MARK: - Subviews
     let numberTextField: UITextField = {
@@ -45,8 +45,6 @@ class InputViewController: UIViewController {
     }()
     
     // MARK: - View Load
-    
- 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -72,9 +70,7 @@ class InputViewController: UIViewController {
             enterButton.heightAnchor.constraint(equalToConstant: 40),
             enterButton.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 2.0 / 3.0)
         ])
-        
     }
-    
     private func setUpActions() {
         enterButton.addTarget(self, action: #selector(enterButtonPressed), for: .touchUpInside)
     }
@@ -84,13 +80,15 @@ class InputViewController: UIViewController {
         guard let inputNumber = numberTextField.text,
               inputNumber != "" else { return }
         
-        //newNumberHandler?(inputNumber)
+        newNumberHandler?(inputNumber)
+        
         if action == .add {
-            delegate?.didAddNumber(inputNumber: inputNumber)
-            
+           // delegate?.didAddNumber(inputNumber: inputNumber)
         } else {
-            delegate?.didChangeNumber(inputNumber: inputNumber, cellRow: selectedCellRow!)
+           // delegate?.didChangeNumber(inputNumber: inputNumber, cellRow: cellRowNumber)
         }
+        
         navigationController?.popViewController(animated: true)
     }
+    
 }
